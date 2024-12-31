@@ -115,7 +115,7 @@ export const TransactionTypeButton = styled(RadioGroup.Item)<ITransactionTypeBut
                         : props.theme["red-500"]
         };
         svg {
-            color: ${props => props.theme.white};
+            color: ${props => props.theme.white}; //
         }
     }
 `;
