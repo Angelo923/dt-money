@@ -1,23 +1,13 @@
-import Header from "../../components/Header";
-import Summary from "../../components/Summary";
-import SearchForm from "./components/SearchForm";
-import {PriceHighLight, TransactionsContainer, TransactionsTable} from "./styles.ts";
-import {useEffect, useState} from "react";
-import {ITransaction} from "../../interface.ts";
+import Header from '../../components/Header';
+import Summary from '../../components/Summary';
+import SearchForm from './components/SearchForm';
+import {PriceHighLight, TransactionsContainer, TransactionsTable} from './styles.ts';
+import {useContext} from 'react';
+import {TransactionsContext} from '../../contexts/TransactionsContext.tsx';
+import {dateFormatter, priceFormatter} from "../../utils/formatter.ts";
 
-function Transactions (){
-    const [transactions, setTransactions] = useState<ITransaction[]>([]);
-
-    async function loadTransactions (){
-        const response = await fetch('http://localhost:3000/transactions');
-        const data = await response.json();
-
-        setTransactions(data);
-
-    }
-    useEffect(()=> {
-        loadTransactions();
-    }, [])
+function Transactions(){
+    const { transactions } = useContext(TransactionsContext)
 
     return (
         <div>
@@ -32,14 +22,15 @@ function Transactions (){
                     {transactions.map(transaction => {
                         return (
                             <tr key={transaction.id}>
-                            <td width="50%">{transaction.description}</td>
+                            <td width='50%'>{transaction.description}</td>
                                 <td>
                                     <PriceHighLight variant={transaction.type}>
-                                        {transaction.price}
+                                        {transaction.type === 'outcome' && '- '}
+                                        {priceFormatter.format(transaction.price)}
                                     </PriceHighLight>
                                 </td>
                                 <td>{transaction.category}</td>
-                                <td>{transaction.createdAt}</td>
+                                <td>{dateFormatter.format(new Date(transaction.createdAt))}</td>
                             </tr>
                         )
                     })}
