@@ -9,10 +9,6 @@ export interface ITransaction {
     createdAt: string;
 }
 
-export interface ITransactionsContext {
-    transactions: ITransaction[];
-}
-
 export interface ITransactionsProvider {
     children: ReactNode;
 }
