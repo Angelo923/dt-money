@@ -3,8 +3,8 @@ import Summary from '../../components/Summary';
 import SearchForm from './components/SearchForm';
 import {PriceHighLight, TransactionsContainer, TransactionsTable} from './styles.ts';
 import {useContext} from 'react';
-import {TransactionsContext} from '../../contexts/TransactionsContext.tsx';
 import {dateFormatter, priceFormatter} from "../../utils/formatter.ts";
+import {TransactionsContext} from "../../contexts/TransactionsContext.tsx";
 
 function Transactions(){
     const { transactions } = useContext(TransactionsContext)
